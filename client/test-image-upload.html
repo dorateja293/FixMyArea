@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JPG Image Upload Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .upload-area {
+            border: 2px dashed #ccc;
+            padding: 20px;
+            text-align: center;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        .preview {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .preview img {
+            width: 100%;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+        .file-info {
+            background: #f5f5f5;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>JPG Image Upload Test</h1>
+    <p>This test verifies that JPG/JPEG images can be uploaded and previewed correctly.</p>
+    
+    <div class="upload-area">
+        <h3>Upload Images</h3>
+        <input type="file" id="imageInput" multiple accept="image/*" />
+        <p>Supported formats: JPG, JPEG, PNG, WebP, GIF</p>
+    </div>
+    
+    <div id="fileInfo"></div>
+    <div id="preview" class="preview"></div>
+
+    <script>
+        const imageInput = document.getElementById('imageInput');
+        const fileInfo = document.getElementById('fileInfo');
+        const preview = document.getElementById('preview');
+        
+        const supportedFormats = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'image/gif'];
+        const formatNames = ['JPEG', 'JPG', 'PNG', 'WebP', 'GIF'];
+        
+        imageInput.addEventListener('change', function(e) {
+            const files = Array.from(e.target.files);
+            fileInfo.innerHTML = '';
+            preview.innerHTML = '';
+            
+            files.forEach((file, index) => {
+                // Check file format
+                const isValidFormat = supportedFormats.includes(file.type.toLowerCase());
+                const isValidSize = file.size <= 5 * 1024 * 1024; // 5MB
+                
+                // Display file info
+                const infoDiv = document.createElement('div');
+                infoDiv.className = 'file-info';
+                infoDiv.innerHTML = `
+                    <strong>File ${index + 1}:</strong> ${file.name}<br>
+                    <strong>Type:</strong> ${file.type} ${isValidFormat ? '✅' : '❌'}<br>
+                    <strong>Size:</strong> ${(file.size / 1024 / 1024).toFixed(2)}MB ${isValidSize ? '✅' : '❌'}<br>
+                    <strong>Supported:</strong> ${isValidFormat && isValidSize ? '✅ Yes' : '❌ No'}
+                `;
+                fileInfo.appendChild(infoDiv);
+                
+                // Create preview
+                if (isValidFormat) {
+                    const img = document.createElement('img');
+                    img.src = URL.createObjectURL(file);
+                    img.alt = file.name;
+                    preview.appendChild(img);
+                }
+            });
+            
+            console.log('✅ JPG Image Upload Test - Files processed:', files.length);
+        });
+    </script>
+</body>
+</html>

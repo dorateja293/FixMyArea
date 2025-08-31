@@ -1,0 +1,12 @@
+[
+  { "state": "Andhra Pradesh", "district": "Anantapur", "village": "Gooty" },
+  { "state": "Andhra Pradesh", "district": "Anantapur", "village": "Kadiri" },
+  { "state": "Andhra Pradesh", "district": "Chittoor", "village": "Punganur" },
+  { "state": "Andhra Pradesh", "district": "Chittoor", "village": "Tirupati" },
+  { "state": "Assam", "district": "Darrang", "village": "Mangaldai" },
+  { "state": "Assam", "district": "Darrang", "village": "Sipajhar" },
+  { "state": "Assam", "district": "Kamrup", "village": "Guwahati" },
+  { "state": "Bihar", "district": "Patna", "village": "Danapur" },
+  { "state": "Bihar", "district": "Patna", "village": "Naubatpur" },
+  { "state": "Bihar", "district": "Nalanda", "village": "Bihar Sharif" }
+]
